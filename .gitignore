@@ -7,3 +7,5 @@
 *.iml
 out
 gen
+/movie-recommend-server/target/
+/logs/

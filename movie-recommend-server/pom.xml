@@ -11,7 +11,17 @@
 
     <artifactId>movie-recommend-server</artifactId>
 
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Brixton.SR2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <!-- 版本控制  -->
     <properties>
         <log4j-api.version>2.8.2</log4j-api.version>
@@ -23,6 +33,19 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <spring-cloud-aws.version>1.1.0.RELEASE</spring-cloud-aws.version>
+        <spring-cloud-bus.version>1.1.0.RELEASE</spring-cloud-bus.version>
+        <spring-cloud-cloudfoundry.version>1.0.0.RELEASE</spring-cloud-cloudfoundry.version>
+        <spring-cloud-commons.version>1.1.1.RELEASE</spring-cloud-commons.version>
+        <spring-cloud-config.version>1.1.2.RELEASE</spring-cloud-config.version>
+        <spring-cloud-netflix.version>1.3.1.RELEASE</spring-cloud-netflix.version>
+        <spring-cloud-security.version>1.1.0.RELEASE</spring-cloud-security.version>
+        <spring-cloud-cluster.version>1.0.0.RELEASE</spring-cloud-cluster.version>
+        <spring-cloud-consul.version>1.0.2.RELEASE</spring-cloud-consul.version>
+        <spring-cloud-sleuth.version>1.0.2.RELEASE</spring-cloud-sleuth.version>
+        <spring-cloud-stream.version>1.0.2.RELEASE</spring-cloud-stream.version>
+        <spring-cloud-task.version>1.0.0.RELEASE</spring-cloud-task.version>
+        <spring-cloud-zookeeper.version>1.0.2.RELEASE</spring-cloud-zookeeper.version>
     </properties>
 
     <dependencies>
@@ -32,15 +55,35 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.chinadaas.riskbell.base</groupId>
-            <artifactId>web-base</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+            <version>${spring-cloud-netflix.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>io.reactivex</groupId>
-                    <artifactId>rxjava</artifactId>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.5.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!--spring相关jar-->
         <dependency>
@@ -75,11 +118,6 @@
             <groupId>tj</groupId>
             <artifactId>movie-recommend-model</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.chinadaas.riskbell.commons</groupId>
-            <artifactId>riskbell-commons-utils</artifactId>
-            <version>1.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
