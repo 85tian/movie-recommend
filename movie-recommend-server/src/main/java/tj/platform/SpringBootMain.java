@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
- * @author tianj
+ * @author 85
  * @date 2018/1/22 2018-01-22 18:24
  * @description spring boot 入口函数
  */
