@@ -22,168 +22,28 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.100.73:13306/data_process?characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://192.168.100.73:13306/movie_recommend?characterEncoding=utf8&useSSL=false
     username: root
-    password: chinadaas
+    password: 123456
+    type:  com.alibaba.druid.pool.DruidDataSource
     max-active: 20
     max_idle:  5
     min_idle: 1
     test-while-idle: true
     time-between-eviction-runs-millis: 60000
     validataion-query: select 1
-
-  rabbitmq:
-    host: 192.168.100.22
-    port: 5672
-    username: guest
-    password: guest
-    concurrentConsumers: 10
-    maxConcurrentConsumers: 10
-    receiveQueneName: dataprocessing-receiver-test-pxp
-    exchange: data-processing
-    maxRetryCount: 3
 
   thymeleaf:
     cache: false
 
-  http:
-    multipart:
-      max-file-size: 20Mb
-      max-request-size: 20Mb
-
-
 logging:
   config: classpath:logback.xml
 
-feign:
-  ShortName:
-   baseurl: http://192.168.75.153:8080
-  rsName:
-   baseurl: http://rs.bidata.com.cn
-client:
-  api:
-    url: http://192.168.100.202/platform/v3
-    uid: ZPVZTLT0
-    securityKey: gQ4gHhlVREgnV61CkM3Psn4Q9j11izt1hVChLqqvZE3CTlJMZu8HpgG4lVhPyiPe
-sysConfig:
-  #文件合并配置
-  fileMerge:
-    #是否合并规则处理后的Excel文件
-    isExcelMerge: false
-    #合并文件时是否进行拆分
-    isSplit: false
-    #每多少行拆分一次，仅当isSplit为true时生效
-    splitSize: 250000
-#ftp配置
-sftp:
-  host: sftp.bidata.com.cn
-  port: 20122
-  username: dev1
-  password: dev1
-  data: data
-  result: result
 #线程配置
 thread:
   corePoolSize: 10
   maxPoolSize: 10
   queneCapacity: 10
   keepAliveSeconds: 60000
-#文件存放路径
-file:
-  original:
-    path: /DataGovern/
-  result:
-    path: /DataGovern/
-  serverSaveFile:
-    path: dataFile
-  serverOutFile:
-    path: resultFile
-
----
-spring:
-  profiles: prod
-  data:
-      elasticsearch:
-        cluster-nodes: 192.168.207.11:59300
-        cluster-name: daas5
-        clientPingTimeout: 5s
-        clientTransportSniff: false
-        clientIgnoreClusterName: true
-        repositories:
-          enabled: true
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.100.73:13306/data_process?characterEncoding=utf8&useSSL=false
-    username: root
-    password: chinadaas
-    max-active: 20
-    max_idle:  5
-    min_idle: 1
-    test-while-idle: true
-    time-between-eviction-runs-millis: 60000
-    validataion-query: select 1
-
-  rabbitmq:
-    host: 192.168.100.22
-    port: 5672
-    username: guest
-    password: guest
-    concurrentConsumers: 10
-    maxConcurrentConsumers: 10
-    receiveQueneName: dataprocessing-receiver
-    exchange: data-processing
-    maxRetryCount: 3
-
-  http:
-      multipart:
-        max-file-size: 20Mb
-        max-request-size: 20Mb
-
-logging:
-    config: classpath:logback.xml
-
-feign:
-  ShortName:
-   baseurl: http://192.168.75.153:8080
-  rsName:
-   baseurl: http://rs.bidata.com.cn
-client:
-  api:
-    url: http://192.168.100.202/platform/v3
-    uid: ZPVZTLT0
-    securityKey: gQ4gHhlVREgnV61CkM3Psn4Q9j11izt1hVChLqqvZE3CTlJMZu8HpgG4lVhPyiPe
-sysConfig:
-  #文件合并配置
-  fileMerge:
-    #是否合并规则处理后的Excel文件
-    isExcelMerge: false
-    #合并文件时是否进行拆分
-    isSplit: false
-    #每多少行拆分一次，仅当isSplit为true时生效
-    splitSize: 250000
-#ftp配置
-sftp:
-  host: sftp.bidata.com.cn
-  port: 20122
-  username: dev1
-  password: dev1
-  data: data
-  result: result
-#线程配置
-thread:
-  corePoolSize: 10
-  maxPoolSize: 10
-  queneCapacity: 10
-  keepAliveSeconds: 60000
-#文件存放路径
-file:
-  original:
-    path: /DataGovern/
-  result:
-    path: /DataGovern/
-  serverSaveFile:
-    path: dataFile
-  serverOutFile:
-    path: resultFile
 
 
