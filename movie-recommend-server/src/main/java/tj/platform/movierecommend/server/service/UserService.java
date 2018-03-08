@@ -2,6 +2,7 @@ package tj.platform.movierecommend.server.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tj.platform.movierecommend.model.entity.User;
 import tj.platform.movierecommend.server.dao.UserMapper;
@@ -39,14 +40,27 @@ public class UserService {
         }*/
         UUID uuid = UUID.randomUUID();
         user.setId(uuid.toString());
-        user.setCreateDate(new Date());
+        Date currentDate = new Date();
+        user.setCreateDate(currentDate);
+        user.setUpdateDate(currentDate);
         user.setSalt(PasswordUtil.generateSalt());
         user.setPassword(PasswordUtil.generate(user.getPassword()));
         userMapper.addUser(user);
     }
 
-    public User findUser(String keyword,String password){
-        User user = userMapper.getOneUser(keyword);
-        return user;
+    /**
+     *根据用户名|邮箱|手机号查询一个用户
+     * @param keyword
+     * @return
+     */
+    @Transactional(propagation = Propagation.SUPPORTS,readOnly = true)
+    public User findUser(String keyword){
+        return userMapper.getOneUser(keyword);
+    }
+
+    @Transactional
+    public void updateUser(User user){
+        user.setUpdateDate(new Date());
+        userMapper.updateUser(user);
     }
 }

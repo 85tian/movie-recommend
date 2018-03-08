@@ -6,6 +6,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +25,8 @@ public class User implements Serializable{
     private String salt;//私盐
 
     private String status;//用户状态
+
+    private List<Movie> favoriteMovie;
 
     public static Map<String, String> STATUS_MAP = new HashMap<>();
 
@@ -158,6 +161,14 @@ public class User implements Serializable{
 
     public Date getUpdateDate() {
         return updateDate;
+    }
+
+    public List<Movie> getFavoriteMovie() {
+        return favoriteMovie;
+    }
+
+    public void setFavoriteMovie(List<Movie> favoriteMovie) {
+        this.favoriteMovie = favoriteMovie;
     }
 
     public void setUpdateDate(Date updateDate) {
